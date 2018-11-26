@@ -44,6 +44,14 @@ In this assignment, You'll create a Trivia game using JavaScript for the logic a
 
 ![Advanced](Images/2-advanced.jpg)
 
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+
 **[Click Here to Watch the demo](https://youtu.be/xhmmiRmxQ8Q)**.
 
 * You'll create a trivia game that shows only one question until the player answers it or their time runs out.
@@ -56,6 +64,14 @@ In this assignment, You'll create a Trivia game using JavaScript for the logic a
   * If the player chooses the wrong answer, tell the player they selected the wrong option and then display the correct answer. Wait a few seconds, then show the next question.
 
 * On the final screen, show the number of correct answers, incorrect answers, and an option to restart the game (without reloading the page).
+
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
 
 ### Reminder: Submission on BCS
 
