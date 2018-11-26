@@ -1,5 +1,7 @@
 html,body {
     background-color: #191a1e;
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    color: #ffffff;
 }
 
 #game-window {
@@ -24,13 +26,28 @@ html,body {
     font-family: 'Georgia', Times, Times New Roman, serif;
     font-weight: bold;
     font-size: 35px;
-    color: #ffffff;
     background-color: #191a1e;
     margin-top: 40px;
     padding: 10px;
     border: 2px solid #777777;
     text-align: center;
     line-height: 1;
+}
+
+.start-row {
+    display: flex;
+    justify-content: center;
+}
+
+#start-button {
+    background-color: #191a1e;
+    border: 2px solid #777777;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    position: relative;
+    top: 180px;
+    padding: 5px 20px;
 }
 
 @media only screen and (max-width: 1026px) {
