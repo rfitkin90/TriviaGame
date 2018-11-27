@@ -50,6 +50,7 @@ html,body {
     padding: 5px 20px;
 }
 
+
 @media only screen and (max-width: 1026px) {
     #game-window {
         margin-top: 0;
