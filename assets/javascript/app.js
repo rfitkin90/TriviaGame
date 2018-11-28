@@ -9,6 +9,7 @@ $(document).ready(function () {
         answerC: "C. Pong",
         answerD: "D. Space Invaders",
         correctAnswer: "C. Pong",
+        img: $('<img src="./assets/images/pong.gif" width="360px" height="200px">'),
     },
     {
         questionText: `Which of these composers wrote the soundtracks for the original 
@@ -18,6 +19,7 @@ $(document).ready(function () {
         answerC: "C. Yasunori Mitsuda",
         answerD: "D. Yoko Shimomura",
         correctAnswer: "A. Koji Kondo",
+        img: $('<img src="./assets/images/koji_kondo.png" width="356px" height="200px">'),
     },
     {
         questionText: `Known for making such titles as "World of Warcraft" and "Diablo", the 
@@ -29,13 +31,58 @@ $(document).ready(function () {
         correctAnswer: "D. Silicon & Synapse",
         // correctAnswer: this.answerD, // ------------- doesnt work here
         // correctAnswer: questionArray[2].answerD, // ------------- or here
+        img: $('<img src="./assets/images/silicon_and_synapse.png" width="229px" height="200px">'),
     }];
 
     // console.log(questionArray[2].answerD); // but works here
 
     var chosenQuestion = null;
-
-    // turn this into array with no object names for each element; splice them out
+    var timerInterval = null;
+    var nextQuestionTimerInterval = null;
+    var answerHasBeenSelected = false;
+    var timer = {
+        time: 25,
+        start: function (t) {
+            timerInterval = setInterval(timer.decrement, 1000);
+            setTimeout(function () {
+                clearInterval(timerInterval);
+            }, t);
+        },
+        stop: function () {
+            clearInterval(timerInterval);
+        },
+        decrement: function () {
+            timer.time--;
+            var convertedTime = timer.timeConverter(timer.time);
+            $("#timer").text(convertedTime);
+        },
+        timeConverter: function (t) {
+            var minutes = Math.floor(t / 60);
+            var seconds = t - (minutes * 60);
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            if (minutes === 0) {
+                minutes = "00";
+            } else if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            return `${minutes}:${seconds}`;
+        },
+    };
+    var nextQuestionTimer = {
+        time: 5,
+        start: function () {
+            nextQuestionTimerInterval = setInterval(nextQuestionTimer.decrement, 1000);
+            setTimeout(function () {
+                clearInterval(nextQuestionTimerInterval);
+            }, 5000);
+        },
+        decrement: function () {
+            nextQuestionTimer.time--;
+            $("#next-question-timer").text(`Next question in ${nextQuestionTimer.time}...`);
+        },
+    }
 
     $("#start-button").hover(function () {
         $(this).css("background-color", "#4aaaa5");
@@ -47,8 +94,12 @@ $(document).ready(function () {
     $("#start-button").on("click", function () {
         var RNG = Math.floor((Math.random() * 3) + 0);
         chosenQuestion = questionArray[RNG];
+
+        // get rid of start button
         $("#start-button").empty();
         $(".start-row").empty();
+
+        // create panel, questions, and answers
         $("#question-panel").append(`<p id="question-text">${questionArray[RNG].questionText}</p>`);
         $("#question-panel").append(`<p id="answer-A" class="answer">${questionArray[RNG].answerA}</p>`);
         $("#question-panel").append(`<p id="answer-B" class="answer">${questionArray[RNG].answerB}</p>`);
@@ -64,6 +115,8 @@ $(document).ready(function () {
             "font-weight": "bold",
             "line-height": 1.3,
             "padding": `${15}px`,
+            "display": "flex",
+            "flex-direction": "column",
         });
         $("#question-panel").children("p").first().css({
             "margin-bottom": `${20}px`,
@@ -77,28 +130,45 @@ $(document).ready(function () {
         }, function () {
             $(this).css("background-color", "#191a1e");
         });
-        $("#question-panel").children("p").last().css({
-            "margin-bottom": 0,
-        });
 
-        $("#question-panel").append(`<p id="timer">00:25</p>`);
+        // create and start timer
+        $("#question-panel").append(`<p id="timer">${timer.timeConverter(25)}</p>`);
         $("#timer").css({
             "color": "#09ff00",
             "text-align": "center",
             "margin": `${10}px`,
             "font-size": `${25}px`,
         });
-
-        function decrementTimer() {
-
-        };
+        timer.start(2000); // change back to 25000 later
+        setTimeout(function () {
+            if (answerHasBeenSelected === false) {
+                $(".answer").remove();
+                $("#timer").remove();
+                $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">Time's up! The correct answer was:</p>`);
+                $("#correct-answer-sentence").after(`<p id="correct-answer" class="post-guess-text">${chosenQuestion.correctAnswer}</p>`);
+                $("#correct-answer").after(chosenQuestion.img);
+                $(chosenQuestion.img).after(`<p id="next-question-timer" class="post-guess-text">Next question in 5...</p>`);
+                $(chosenQuestion.img).css({
+                    "align-self": "center",
+                    "margin-top": `${10}px`,
+                    "margin-bottom": `${10}px`,
+                });
+                $(".post-guess-text").css({
+                    "text-align": "center",
+                    "line-height": 1.5,
+                })
+                nextQuestionTimer.start();
+            }
+        }, 2000); // change back to 25000 later
 
     });
 
     $("body").on("click", "p.answer", function () {
+        answerHasBeenSelected = true;
         if ($(this).text() === chosenQuestion.correctAnswer) {
             console.log("you win, yay");
-        } else { 
+            timer.stop();
+        } else {
 
         }
     });
