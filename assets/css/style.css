@@ -13,7 +13,6 @@ html,body {
     background-size:cover;
     background-position: center; 
     margin: auto;
-    margin-top: 80px;
     border: 2px solid #777777;
 }
 
@@ -49,10 +48,3 @@ html,body {
     top: 180px;
     padding: 5px 20px;
 }
-
-
-@media only screen and (max-width: 1026px) {
-    #game-window {
-        margin-top: 0;
-    }
-} 
