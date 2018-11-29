@@ -29,6 +29,12 @@ $(document).ready(function () {
         answerC: "C. Ogre Studios",
         answerD: "D. Silicon & Synapse",
         correctAnswer: "D. Silicon & Synapse",
+        // answers: [{
+        //     answerA: "A. Interplay Productions",
+        //     answerB: "B. Condor Games",
+        //     answerC: "C. Ogre Studios",
+        //     answerD: "D. Silicon & Synapse",
+        // }],
         // correctAnswer: this.answerD, // ------------- doesnt work here
         // correctAnswer: questionArray[2].answerD, // ------------- or here
         img: $('<img src="./assets/images/silicon_and_synapse.png" width="229px" height="200px">'),
@@ -40,6 +46,8 @@ $(document).ready(function () {
     var timerInterval = null;
     var nextQuestionTimerInterval = null;
     var answerHasBeenSelected = false;
+
+    // timer for answering question
     var timer = {
         time: 25,
         start: function (t) {
@@ -70,12 +78,16 @@ $(document).ready(function () {
             return `${minutes}:${seconds}`;
         },
     };
+
+    // timer that counts down to next question
     var nextQuestionTimer = {
         time: 5,
         start: function () {
             nextQuestionTimerInterval = setInterval(nextQuestionTimer.decrement, 1000);
             setTimeout(function () {
                 clearInterval(nextQuestionTimerInterval);
+                $("#question-panel").empty();
+                populateQuestionPanel();
             }, 5000);
         },
         decrement: function () {
@@ -84,6 +96,7 @@ $(document).ready(function () {
         },
     }
 
+    // start button
     $("#start-button").hover(function () {
         $(this).css("background-color", "#4aaaa5");
     }, function () {
@@ -92,19 +105,53 @@ $(document).ready(function () {
 
     // use RNG to select and display a random object with a timer counting down to 0
     $("#start-button").on("click", function () {
-        var RNG = Math.floor((Math.random() * 3) + 0);
+
+        // create panel, questions, and answers
+        timer.time = 25;
+        populateQuestionPanel();
+
+    });
+
+    // on click for answers
+    $("body").on("click", "p.answer", function () {
+        answerHasBeenSelected = true;
+        if ($(this).text() === chosenQuestion.correctAnswer) {
+            console.log("you win, yay");
+            timer.stop();
+        } else {
+
+        }
+    });
+
+    // ask about global if statements
+    // look up for vs foreach
+    // $('selector').on("click", function () {
+
+    // tally # of right/wrong/unselected answers
+
+    // display correct answer, whether the player was correct,
+    // incorrect, or ran out of time and start a timer to display next question
+
+    // at end of game, display score tallies and a reset game button
+
+    // -------------------- Functions ----------------- //
+    function populateQuestionPanel() {
+        // generate random number and get random question from array
+        var RNG = Math.floor((Math.random() * questionArray.length) + 0);
         chosenQuestion = questionArray[RNG];
 
         // get rid of start button
         $("#start-button").empty();
         $(".start-row").empty();
 
-        // create panel, questions, and answers
+        // populate question panel with questions and answers
         $("#question-panel").append(`<p id="question-text">${questionArray[RNG].questionText}</p>`);
         $("#question-panel").append(`<p id="answer-A" class="answer">${questionArray[RNG].answerA}</p>`);
         $("#question-panel").append(`<p id="answer-B" class="answer">${questionArray[RNG].answerB}</p>`);
         $("#question-panel").append(`<p id="answer-C" class="answer">${questionArray[RNG].answerC}</p>`);
         $("#question-panel").append(`<p id="answer-D" class="answer">${questionArray[RNG].answerD}</p>`);
+
+        // give question panel some css
         $("#question-panel").css({
             "background-color": "#191a1e",
             "border-width": `${2}px`,
@@ -140,14 +187,27 @@ $(document).ready(function () {
             "font-size": `${25}px`,
         });
         timer.start(2000); // change back to 25000 later
+
+        // if user runs out of time w/o making a guess
         setTimeout(function () {
             if (answerHasBeenSelected === false) {
                 $(".answer").remove();
                 $("#timer").remove();
-                $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">Time's up! The correct answer was:</p>`);
-                $("#correct-answer-sentence").after(`<p id="correct-answer" class="post-guess-text">${chosenQuestion.correctAnswer}</p>`);
+
+                // correct/incorrect verification
+                $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
+                    Time's up! The correct answer was:</p>`);
+
+                // show correct answer, image, and next question timer
+                $("#correct-answer-sentence").after(`<p id="correct-answer" class="post-guess-text">
+                    ${chosenQuestion.correctAnswer}</p>`);
                 $("#correct-answer").after(chosenQuestion.img);
-                $(chosenQuestion.img).after(`<p id="next-question-timer" class="post-guess-text">Next question in 5...</p>`);
+
+                // timer countdown to next questions
+                $(chosenQuestion.img).after(`<p id="next-question-timer" class="post-guess-text">
+                    Next question in 5...</p>`);
+
+                // give image and text some css
                 $(chosenQuestion.img).css({
                     "align-self": "center",
                     "margin-top": `${10}px`,
@@ -156,33 +216,34 @@ $(document).ready(function () {
                 $(".post-guess-text").css({
                     "text-align": "center",
                     "line-height": 1.5,
-                })
+                });
+
+                // reset intial timer values
+                nextQuestionTimer.time = 5;
+                timer.time = 25;
+
+                // start next question timer
                 nextQuestionTimer.start();
+
+                // remove question from the question array(to prevent repeats)
+                questionArray.splice(RNG, 1);
+                console.log(questionArray);
             }
         }, 2000); // change back to 25000 later
+    }
 
-    });
-
-    $("body").on("click", "p.answer", function () {
-        answerHasBeenSelected = true;
-        if ($(this).text() === chosenQuestion.correctAnswer) {
-            console.log("you win, yay");
-            timer.stop();
-        } else {
-
-        }
-    });
-
-    // ask about global if statements
-    // look up for vs foreach
-    // $('selector').on("click", function () {
-
-    // tally # of right/wrong/unselected answers
-
-    // display correct answer, whether the player was correct,
-    // incorrect, or ran out of time and start a timer to display next question
-
-    // at end of game, display score tallies and a reset game button
-
+    // post-guess text
+    function correctGuess() {
+        $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
+        Correct!</p>`);
+    }
+    function incorrectGuess() {
+        $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
+        Wrong! The correct answer was:</p>`);
+    }
+    function timeoutGuess() {
+        $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
+        Time's up! The correct answer was:</p>`);
+    }
 
 });
