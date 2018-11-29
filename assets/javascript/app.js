@@ -1,46 +1,45 @@
 // create basic page layout with start button
 $(document).ready(function () {
-    // create object of questions with 4 possible answers and one correct answer
 
+    // create array of questions with 4 possible answers and one correct answer
     var questionArray = [{
         questionText: "What was the first ever game released for the Atari 2600?",
-        answerA: "A. Asteroids",
-        answerB: "B. Snake",
-        answerC: "C. Pong",
-        answerD: "D. Space Invaders",
+        answers: [
+            "A. Asteroids",
+            "B. Snake",
+            "C. Pong",
+            "D. Space Invaders",
+        ],
+        // correctAnswer: this.answers[2], // not working
         correctAnswer: "C. Pong",
         img: $('<img src="./assets/images/pong.gif" width="360px" height="200px">'),
     },
     {
         questionText: `Which of these composers wrote the soundtracks for the original 
             "Super Mario Bros." and "The Legend of Zelda" games for the Nintendo Entertainment System?`,
-        answerA: "A. Koji Kondo",
-        answerB: "B. Nobuo Uematsu",
-        answerC: "C. Yasunori Mitsuda",
-        answerD: "D. Yoko Shimomura",
+        answers: [
+            "A. Koji Kondo",
+            "B. Nobuo Uematsu",
+            "C. Yasunori Mitsuda",
+            "D. Yoko Shimomura",
+        ],
+        // correctAnswer: this.answers[0], // not working
         correctAnswer: "A. Koji Kondo",
         img: $('<img src="./assets/images/koji_kondo.png" width="356px" height="200px">'),
     },
     {
         questionText: `Known for making such titles as "World of Warcraft" and "Diablo", the 
             company "Activision Blizzard" was orginally called by what name in the early 90s?`,
-        answerA: "A. Interplay Productions",
-        answerB: "B. Condor Games",
-        answerC: "C. Ogre Studios",
-        answerD: "D. Silicon & Synapse",
+        answers: [
+            "A. Interplay Productions",
+            "B. Condor Games",
+            "C. Ogre Studios",
+            "D. Silicon & Synapse",
+        ],
+        // correctAnswer: this.answers[3], // not working
         correctAnswer: "D. Silicon & Synapse",
-        // answers: [{
-        //     answerA: "A. Interplay Productions",
-        //     answerB: "B. Condor Games",
-        //     answerC: "C. Ogre Studios",
-        //     answerD: "D. Silicon & Synapse",
-        // }],
-        // correctAnswer: this.answerD, // ------------- doesnt work here
-        // correctAnswer: questionArray[2].answerD, // ------------- or here
         img: $('<img src="./assets/images/silicon_and_synapse.png" width="229px" height="200px">'),
     }];
-
-    // console.log(questionArray[2].answerD); // but works here
 
     var chosenQuestion = null;
     var timerInterval = null;
@@ -60,12 +59,12 @@ $(document).ready(function () {
     // timer for answering question
     var timer = {
         time: 25,
-        start: function (t) {
-            this.time = 25,
-                timerInterval = setInterval(timer.decrement, 1000);
+        start: function () {
+            this.time = 25;
+            timerInterval = setInterval(timer.decrement, 1000);
             setTimeout(function () {
                 clearInterval(timerInterval);
-            }, t);
+            }, 25000);
         },
         stop: function () {
             clearInterval(timerInterval);
@@ -94,8 +93,8 @@ $(document).ready(function () {
     var nextQuestionTimer = {
         time: 5,
         start: function () {
-            this.time = 5,
-                nextQuestionTimerInterval = setInterval(nextQuestionTimer.decrement, 1000);
+            this.time = 5;
+            nextQuestionTimerInterval = setInterval(nextQuestionTimer.decrement, 1000);
             setTimeout(function () {
                 clearInterval(nextQuestionTimerInterval);
                 $("#question-panel").empty();
@@ -111,8 +110,8 @@ $(document).ready(function () {
     var roundEndTimer = {
         time: 5,
         start: function () {
-            this.time = 5,
-                roundEndTimerInterval = setInterval(roundEndTimer.decrement, 1000);
+            this.time = 5;
+            roundEndTimerInterval = setInterval(roundEndTimer.decrement, 1000);
             setTimeout(function () {
                 clearInterval(roundEndTimerInterval);
                 $("#question-panel").empty();
@@ -152,16 +151,6 @@ $(document).ready(function () {
         }
     });
 
-    // ask about global if statements
-    // look up for vs foreach
-    // $('selector').on("click", function () {
-
-    // tally # of right/wrong/unselected answers
-
-    // display correct answer, whether the player was correct,
-    // incorrect, or ran out of time and start a timer to display next question
-
-    // at end of game, display score tallies and a reset game button
 
     // -------------------- Functions ----------------- //
     function populateQuestionPanel() {
@@ -177,10 +166,10 @@ $(document).ready(function () {
 
         // populate question panel with questions and answers
         $("#question-panel").append(`<p id="question-text">${questionArray[RNG].questionText}</p>`);
-        $("#question-panel").append(`<p id="answer-A" class="answer">${questionArray[RNG].answerA}</p>`);
-        $("#question-panel").append(`<p id="answer-B" class="answer">${questionArray[RNG].answerB}</p>`);
-        $("#question-panel").append(`<p id="answer-C" class="answer">${questionArray[RNG].answerC}</p>`);
-        $("#question-panel").append(`<p id="answer-D" class="answer">${questionArray[RNG].answerD}</p>`);
+        $("#question-panel").append(`<p id="answer-A" class="answer">${questionArray[RNG].answers[0]}</p>`);
+        $("#question-panel").append(`<p id="answer-B" class="answer">${questionArray[RNG].answers[1]}</p>`);
+        $("#question-panel").append(`<p id="answer-C" class="answer">${questionArray[RNG].answers[2]}</p>`);
+        $("#question-panel").append(`<p id="answer-D" class="answer">${questionArray[RNG].answers[3]}</p>`);
 
         // give question panel some css
         $("#question-panel").css({
@@ -217,7 +206,7 @@ $(document).ready(function () {
             "margin": `${10}px`,
             "font-size": `${25}px`,
         });
-        timer.start(2000); // change back to 25000 later
+        timer.start();
 
         // if user runs out of time w/o making a guess
         setTimeout(function () {
@@ -225,10 +214,11 @@ $(document).ready(function () {
                 postGuessPanel(timeoutGuess, RNG);
                 unansweredQuestions++;
             }
-        }, 2000); // change back to 25000 later
+        }, 25000);
     }
 
-    // panel that displays after user makes a guess or runs out of time
+    // display correct answer, whether the player was correct,
+    // incorrect, or ran out of time and start a timer to display next question
     function postGuessPanel(guessOutcome, RNG) {
 
         $("#question-panel").css({
@@ -237,8 +227,8 @@ $(document).ready(function () {
 
         if (questionArray.length > 1) {
             console.log(questionArray.length);
-            $(".answer").detach();
-            $("#timer").detach();
+            $(".answer").remove();
+            $("#timer").remove();
 
             // correct/incorrect verification
             $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
@@ -270,8 +260,8 @@ $(document).ready(function () {
             // remove question from the question array(to prevent repeats)
             questionArray.splice(RNG, 1);
         } else {
-            $(".answer").detach();
-            $("#timer").detach();
+            $(".answer").remove();
+            $("#timer").remove();
 
             // correct/incorrect verification
             $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
@@ -302,6 +292,7 @@ $(document).ready(function () {
         }
     }
 
+    // at end of game, display score tallies and a reset game button
     function populateRoundEndScreen() {
         $("#question-panel").empty();
         $("#question-panel").append(`<p id="score-tally-header" class="score-tally-text">Score Tallies</p>`);
@@ -331,49 +322,64 @@ $(document).ready(function () {
         }, function () {
             $(this).css("background-color", "#191a1e");
         });
+
+        // why does this on click not work if moved outside of populateRoundEndScreen function?
         $("#restart-button").on("click", function () {
+            // set variables back to initial values
+            chosenQuestion = null;
+            timerInterval = null;
+            nextQuestionTimerInterval = null;
+            roundEndTimerInterval = null;
+            answerHasBeenSelected = false;
+            RNG = null;
             correctAnswers = 0;
             incorrectAnswers = 0;
             unansweredQuestions = 0;
+
+            // redeclares original question array(since everything was spliced out to prevent repeat questions)
             questionArray = [{
                 questionText: "What was the first ever game released for the Atari 2600?",
-                answerA: "A. Asteroids",
-                answerB: "B. Snake",
-                answerC: "C. Pong",
-                answerD: "D. Space Invaders",
+                answers: [
+                    "A. Asteroids",
+                    "B. Snake",
+                    "C. Pong",
+                    "D. Space Invaders",
+                ],
+                // correctAnswer: this.answers[2],
                 correctAnswer: "C. Pong",
                 img: $('<img src="./assets/images/pong.gif" width="360px" height="200px">'),
             },
             {
                 questionText: `Which of these composers wrote the soundtracks for the original 
                     "Super Mario Bros." and "The Legend of Zelda" games for the Nintendo Entertainment System?`,
-                answerA: "A. Koji Kondo",
-                answerB: "B. Nobuo Uematsu",
-                answerC: "C. Yasunori Mitsuda",
-                answerD: "D. Yoko Shimomura",
+                answers: [
+                    "A. Koji Kondo",
+                    "B. Nobuo Uematsu",
+                    "C. Yasunori Mitsuda",
+                    "D. Yoko Shimomura",
+                ],
+                // correctAnswer: this.answers[0],
                 correctAnswer: "A. Koji Kondo",
                 img: $('<img src="./assets/images/koji_kondo.png" width="356px" height="200px">'),
             },
             {
                 questionText: `Known for making such titles as "World of Warcraft" and "Diablo", the 
                     company "Activision Blizzard" was orginally called by what name in the early 90s?`,
-                answerA: "A. Interplay Productions",
-                answerB: "B. Condor Games",
-                answerC: "C. Ogre Studios",
-                answerD: "D. Silicon & Synapse",
+                answers: [
+                    "A. Interplay Productions",
+                    "B. Condor Games",
+                    "C. Ogre Studios",
+                    "D. Silicon & Synapse",
+                ],
+                // correctAnswer: this.answers[3],
                 correctAnswer: "D. Silicon & Synapse",
-                // answers: [{
-                //     answerA: "A. Interplay Productions",
-                //     answerB: "B. Condor Games",
-                //     answerC: "C. Ogre Studios",
-                //     answerD: "D. Silicon & Synapse",
-                // }],
-                // correctAnswer: this.answerD, // ------------- doesnt work here
-                // correctAnswer: questionArray[2].answerD, // ------------- or here
                 img: $('<img src="./assets/images/silicon_and_synapse.png" width="229px" height="200px">'),
             }];
-            console.log(questionArray.length);
+
+            // empties question panel
             $("#question-panel").empty();
+
+            // starts game with new question
             populateQuestionPanel();
         });
     }
