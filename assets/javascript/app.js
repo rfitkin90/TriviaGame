@@ -45,14 +45,24 @@ $(document).ready(function () {
     var chosenQuestion = null;
     var timerInterval = null;
     var nextQuestionTimerInterval = null;
+    var roundEndTimerInterval = null;
     var answerHasBeenSelected = false;
+    var RNG = null;
+    var correctAnswers = 0;
+    var incorrectAnswers = 0;
+    var unansweredQuestions = 0;
+
+    // post-guess text
+    var correctGuess = "Correct!";
+    var incorrectGuess = "Wrong! The correct answer was:";
+    var timeoutGuess = "Time's up! The correct answer was:";
 
     // timer for answering question
     var timer = {
         time: 25,
         start: function (t) {
             this.time = 25,
-            timerInterval = setInterval(timer.decrement, 1000);
+                timerInterval = setInterval(timer.decrement, 1000);
             setTimeout(function () {
                 clearInterval(timerInterval);
             }, t);
@@ -85,7 +95,7 @@ $(document).ready(function () {
         time: 5,
         start: function () {
             this.time = 5,
-            nextQuestionTimerInterval = setInterval(nextQuestionTimer.decrement, 1000);
+                nextQuestionTimerInterval = setInterval(nextQuestionTimer.decrement, 1000);
             setTimeout(function () {
                 clearInterval(nextQuestionTimerInterval);
                 $("#question-panel").empty();
@@ -95,6 +105,23 @@ $(document).ready(function () {
         decrement: function () {
             nextQuestionTimer.time--;
             $("#next-question-timer").text(`Next question in ${nextQuestionTimer.time}...`);
+        },
+    }
+    // timer to end the round
+    var roundEndTimer = {
+        time: 5,
+        start: function () {
+            this.time = 5,
+                roundEndTimerInterval = setInterval(roundEndTimer.decrement, 1000);
+            setTimeout(function () {
+                clearInterval(roundEndTimerInterval);
+                $("#question-panel").empty();
+                populateRoundEndScreen();
+            }, 5000);
+        },
+        decrement: function () {
+            roundEndTimer.time--;
+            $("#next-question-timer").text(`Round end in ${roundEndTimer.time}...`);
         },
     }
 
@@ -117,10 +144,11 @@ $(document).ready(function () {
     $("body").on("click", "p.answer", function () {
         answerHasBeenSelected = true;
         if ($(this).text() === chosenQuestion.correctAnswer) {
-            console.log("you win, yay");
-            timer.stop();
+            postGuessPanel(correctGuess, RNG);
+            correctAnswers++;
         } else {
-
+            postGuessPanel(incorrectGuess, RNG);
+            incorrectAnswers++;
         }
     });
 
@@ -138,12 +166,14 @@ $(document).ready(function () {
     // -------------------- Functions ----------------- //
     function populateQuestionPanel() {
         // generate random number and get random question from array
-        var RNG = Math.floor((Math.random() * questionArray.length) + 0);
+        RNG = Math.floor((Math.random() * questionArray.length) + 0);
         chosenQuestion = questionArray[RNG];
 
+        answerHasBeenSelected = false;
+
         // get rid of start button
-        $("#start-button").empty();
-        $(".start-row").empty();
+        $("#start-button").detach();
+        $(".start-row").detach();
 
         // populate question panel with questions and answers
         $("#question-panel").append(`<p id="question-text">${questionArray[RNG].questionText}</p>`);
@@ -192,55 +222,161 @@ $(document).ready(function () {
         // if user runs out of time w/o making a guess
         setTimeout(function () {
             if (answerHasBeenSelected === false) {
-                $(".answer").remove();
-                $("#timer").remove();
-
-                // correct/incorrect verification
-                $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
-                    Time's up! The correct answer was:</p>`);
-
-                // show correct answer, image, and next question timer
-                $("#correct-answer-sentence").after(`<p id="correct-answer" class="post-guess-text">
-                    ${chosenQuestion.correctAnswer}</p>`);
-                $("#correct-answer").after(chosenQuestion.img);
-
-                // timer countdown to next questions
-                $(chosenQuestion.img).after(`<p id="next-question-timer" class="post-guess-text">
-                    Next question in 5...</p>`);
-
-                // give image and text some css
-                $(chosenQuestion.img).css({
-                    "align-self": "center",
-                    "margin-top": `${10}px`,
-                    "margin-bottom": `${10}px`,
-                });
-                $(".post-guess-text").css({
-                    "text-align": "center",
-                    "line-height": 1.5,
-                });
-
-                // start next question timer
-                nextQuestionTimer.start();
-
-                // remove question from the question array(to prevent repeats)
-                questionArray.splice(RNG, 1);
-                console.log(questionArray);
+                postGuessPanel(timeoutGuess, RNG);
+                unansweredQuestions++;
             }
         }, 2000); // change back to 25000 later
     }
 
-    // post-guess text
-    function correctGuess() {
-        $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
-        Correct!</p>`);
+    // panel that displays after user makes a guess or runs out of time
+    function postGuessPanel(guessOutcome, RNG) {
+
+        $("#question-panel").css({
+            "top": `${55}px`,
+        });
+
+        if (questionArray.length > 1) {
+            console.log(questionArray.length);
+            $(".answer").detach();
+            $("#timer").detach();
+
+            // correct/incorrect verification
+            $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
+            ${guessOutcome}</p>`);
+
+            // show correct answer, image, and next question timer
+            $("#correct-answer-sentence").after(`<p id="correct-answer" class="post-guess-text">
+            ${chosenQuestion.correctAnswer}</p>`);
+            $("#correct-answer").after(chosenQuestion.img);
+
+            // timer countdown to next questions
+            $(chosenQuestion.img).after(`<p id="next-question-timer" class="post-guess-text">
+            Next question in 5...</p>`);
+
+            // give image and text some css
+            $(chosenQuestion.img).css({
+                "align-self": "center",
+                "margin-top": `${10}px`,
+                "margin-bottom": `${10}px`,
+            });
+            $(".post-guess-text").css({
+                "text-align": "center",
+                "line-height": 1.5,
+            });
+
+            // start next question timer
+            nextQuestionTimer.start();
+
+            // remove question from the question array(to prevent repeats)
+            questionArray.splice(RNG, 1);
+        } else {
+            $(".answer").detach();
+            $("#timer").detach();
+
+            // correct/incorrect verification
+            $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
+            ${guessOutcome}</p>`);
+
+            // show correct answer, image, and next question timer
+            $("#correct-answer-sentence").after(`<p id="correct-answer" class="post-guess-text">
+            ${chosenQuestion.correctAnswer}</p>`);
+            $("#correct-answer").after(chosenQuestion.img);
+
+            // timer countdown to next questions
+            $(chosenQuestion.img).after(`<p id="next-question-timer" class="post-guess-text">
+            Round end in 5...</p>`);
+
+            // give image and text some css
+            $(chosenQuestion.img).css({
+                "align-self": "center",
+                "margin-top": `${10}px`,
+                "margin-bottom": `${10}px`,
+            });
+            $(".post-guess-text").css({
+                "text-align": "center",
+                "line-height": 1.5,
+            });
+
+            // round end question timer
+            roundEndTimer.start();
+        }
     }
-    function incorrectGuess() {
-        $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
-        Wrong! The correct answer was:</p>`);
+
+    function populateRoundEndScreen() {
+        $("#question-panel").empty();
+        $("#question-panel").append(`<p id="score-tally-header" class="score-tally-text">Score Tallies</p>`);
+        $("#question-panel").css({
+            "top": `${115}px`,
+        });
+        $("#score-tally-header").css({
+            "font-size": `${30}px`,
+        });
+        $("#question-panel").append(`<p class="score-tally-text">Correct answers: ${correctAnswers}</p>`);
+        $("#question-panel").append(`<p class="score-tally-text">Incorrect answers: ${incorrectAnswers}</p>`);
+        $("#question-panel").append(`<p class="score-tally-text">Unanswered: ${unansweredQuestions}</p>`);
+        $(".score-tally-text").css({
+            "text-align": "center",
+            "line-height": 2,
+        });
+        $("#question-panel").append(`<div class="btn start-or-restart-btn" id="restart-button">Restart?</div>`);
+        $("#restart-button").css({
+            "top": "initial",
+            "width": `${142}px`,
+            "margin": "auto",
+            "margin-top": `${20}px`,
+            "margin-bottom": `${20}px`,
+        });
+        $("#restart-button").hover(function () {
+            $(this).css("background-color", "#4aaaa5");
+        }, function () {
+            $(this).css("background-color", "#191a1e");
+        });
+        $("#restart-button").on("click", function () {
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            unansweredQuestions = 0;
+            questionArray = [{
+                questionText: "What was the first ever game released for the Atari 2600?",
+                answerA: "A. Asteroids",
+                answerB: "B. Snake",
+                answerC: "C. Pong",
+                answerD: "D. Space Invaders",
+                correctAnswer: "C. Pong",
+                img: $('<img src="./assets/images/pong.gif" width="360px" height="200px">'),
+            },
+            {
+                questionText: `Which of these composers wrote the soundtracks for the original 
+                    "Super Mario Bros." and "The Legend of Zelda" games for the Nintendo Entertainment System?`,
+                answerA: "A. Koji Kondo",
+                answerB: "B. Nobuo Uematsu",
+                answerC: "C. Yasunori Mitsuda",
+                answerD: "D. Yoko Shimomura",
+                correctAnswer: "A. Koji Kondo",
+                img: $('<img src="./assets/images/koji_kondo.png" width="356px" height="200px">'),
+            },
+            {
+                questionText: `Known for making such titles as "World of Warcraft" and "Diablo", the 
+                    company "Activision Blizzard" was orginally called by what name in the early 90s?`,
+                answerA: "A. Interplay Productions",
+                answerB: "B. Condor Games",
+                answerC: "C. Ogre Studios",
+                answerD: "D. Silicon & Synapse",
+                correctAnswer: "D. Silicon & Synapse",
+                // answers: [{
+                //     answerA: "A. Interplay Productions",
+                //     answerB: "B. Condor Games",
+                //     answerC: "C. Ogre Studios",
+                //     answerD: "D. Silicon & Synapse",
+                // }],
+                // correctAnswer: this.answerD, // ------------- doesnt work here
+                // correctAnswer: questionArray[2].answerD, // ------------- or here
+                img: $('<img src="./assets/images/silicon_and_synapse.png" width="229px" height="200px">'),
+            }];
+            console.log(questionArray.length);
+            $("#question-panel").empty();
+            populateQuestionPanel();
+        });
     }
-    function timeoutGuess() {
-        $("#question-text").after(`<p id="correct-answer-sentence" class="post-guess-text">
-        Time's up! The correct answer was:</p>`);
-    }
+
 
 });

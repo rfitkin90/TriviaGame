@@ -38,7 +38,7 @@ html,body {
     justify-content: center;
 }
 
-#start-button {
+.start-or-restart-btn {
     background-color: #191a1e;
     border: 2px solid #777777;
     text-align: center;
