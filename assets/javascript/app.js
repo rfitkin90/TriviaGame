@@ -51,6 +51,7 @@ $(document).ready(function () {
     var timer = {
         time: 25,
         start: function (t) {
+            this.time = 25,
             timerInterval = setInterval(timer.decrement, 1000);
             setTimeout(function () {
                 clearInterval(timerInterval);
@@ -83,6 +84,7 @@ $(document).ready(function () {
     var nextQuestionTimer = {
         time: 5,
         start: function () {
+            this.time = 5,
             nextQuestionTimerInterval = setInterval(nextQuestionTimer.decrement, 1000);
             setTimeout(function () {
                 clearInterval(nextQuestionTimerInterval);
@@ -107,7 +109,6 @@ $(document).ready(function () {
     $("#start-button").on("click", function () {
 
         // create panel, questions, and answers
-        timer.time = 25;
         populateQuestionPanel();
 
     });
@@ -217,10 +218,6 @@ $(document).ready(function () {
                     "text-align": "center",
                     "line-height": 1.5,
                 });
-
-                // reset intial timer values
-                nextQuestionTimer.time = 5;
-                timer.time = 25;
 
                 // start next question timer
                 nextQuestionTimer.start();
