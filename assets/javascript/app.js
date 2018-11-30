@@ -39,7 +39,7 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/silicon_and_synapse.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
-        questionText: `Which Pokémon is logged in the first slot of the Pokédex?`,
+        questionText: `Which pokémon is logged in the first slot of the pokédex?`,
         answers: [
             "A. Pikachu",
             "B. Squirtle",
@@ -51,8 +51,8 @@ $(document).ready(function () {
     },
     {
         questionText: `Which these games features a specially engineered super-soldier who must 
-        stop a rebellion staged by members of his old unit, all named after animals (octopus, et al), 
-        and whose sword-wielding friend will sacrifice himself to disarm a bipedal battle robot?`,
+        stop a rebellion staged by members of his old unit, each named after an animal (octopus, et al), 
+        and whose sword-wielding friend sacrifices himself to disarm a bipedal battle robot?`,
         answers: [
             "A. Mega Man X",
             "B. Metal Gear Solid",
@@ -74,7 +74,7 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/megaman.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
-        questionText: `In the Castlevania series, which of these protagonists is chronologically(in terms 
+        questionText: `In the "Castlevania" series, which of these protagonists is chronologically(in terms 
         of story timeline, not game release dates) the earliest appearing member of the Belmont Clan?`,
         answers: [
             "A. Simon Belmont",
@@ -86,7 +86,7 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/leon_belmont.png" class="img-fluid" style="max-height:180px; width:auto">'),
     },
     {
-        questionText: `In Super Mario World, which color Yoshis can fly upon eating any color koopa shell?`,
+        questionText: `In "Super Mario World", which color Yoshis can fly upon eating any color koopa shell?`,
         answers: [
             "A. Red",
             "B. Green",
@@ -97,7 +97,7 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/blue_yoshi.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
-        questionText: `What was Mario originally named in his debut game, Donkey Kong?`,
+        questionText: `What was Mario originally named in his debut game, "Donkey Kong"?`,
         answers: [
             "A. Jumpman",
             "B. Plumberman",
@@ -108,7 +108,7 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/donkey_kong.gif" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
-        questionText: `Who was the damsel in distress in the original Mario game, Donkey Kong?`,
+        questionText: `Who was the damsel in distress in the original Mario game, "Donkey Kong"?`,
         answers: [
             "A. Princess Peach",
             "B. Pauline",
@@ -142,8 +142,8 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/doom.gif" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
-        questionText: `How many unique Power Moons can be found in Super Mario Odyssey(excluding duplicate 
-            purchases from the same shop)?`,
+        questionText: `How many unique Power Moons can be found in "Super Mario Odyssey"(excluding duplicate 
+            purchases shops)?`,
         answers: [
             "A. 120",
             "B. 500",
@@ -154,8 +154,8 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/power_moon.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
-        questionText: `How many Korok seeds can you obtain from hidden Koroks in The Legend of Zelda: 
-        Breath of the Wild?`,
+        questionText: `How many Korok seeds can you obtain from hidden Koroks in "The Legend of Zelda: 
+        Breath of the Wild"?`,
         answers: [
             "A. 300",
             "B. 450",
@@ -166,7 +166,7 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/koroks.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
-        questionText: `What are the names of the three pieces of the Triforce in The Legend of Zelda?`,
+        questionText: `What are the names of the three pieces of the Triforce in "The Legend of Zelda"?`,
         answers: [
             "A. Courage, Wisdom, Power",
             "B. Bravery, Strength, Wit",
@@ -177,7 +177,7 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/triforce.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
-        questionText: `In The Idolm@ster series, which idol became an idol to show her feminine side after 
+        questionText: `In the "The Idolm@ster" series, which idol became an idol to show her feminine side after 
         having been raised like a boy by her father who wished he had a son?`,
         answers: [
             "A. Haruka Amami",
@@ -189,8 +189,9 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/makoto.png" class="img-fluid" style="max-height:180px; width:auto">'),
     },
     {
-        questionText: `Formerly known as the longest standing video game world record of all time, the Atari 2600 
-        Dragster fastest time record recently purged from Guiness World Records for being fake was believe to be held by who?`,
+        questionText: `Formerly known as the longest standing video game world record of all time, the fastest time 
+        record for "Dragster", which was recently purged from Guiness World Records for being fake, was believed to 
+        be held by who?`,
         answers: [
             "A. Billy Mitchell",
             "B. Todd Rogers",
@@ -201,8 +202,8 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/todd_rogers.jpeg" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
-        questionText: `Which of these characters is not going to be a playable character in the upcoming Super Mash Bros. 
-        Ultimate game?`,
+        questionText: `Which of these characters is not going to be a playable character in the upcoming "Super Mash Bros. 
+        Ultimate" game?`,
         answers: [
             "A. Richter Belmont",
             "B. Ridley",
@@ -213,8 +214,8 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/waluigi.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
-        questionText: `Which of the following Dota 2 heroes was not yet implemented into the game at the time of the 
-        first The International tournament in 2011?`,
+        questionText: `Which of the following "Dota 2" heroes was not yet implemented into the game at the time of the 
+        first "The International" tournament in 2011?`,
         answers: [
             "A. Axe",
             "B. Zeus",
@@ -225,7 +226,7 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/lycan.png" class="img-fluid" style="max-height:180px; width:auto">'),
     },
     {
-        questionText: `Which of the following games was not a release title for the Nintendo 64?`,
+        questionText: `Which of the following games was not a launch title for the Nintendo 64?`,
         answers: [
             "A. Super Mario 64",
             "B. Pilotwings 64",
