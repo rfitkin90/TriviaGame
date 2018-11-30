@@ -1,4 +1,3 @@
-// create basic page layout with start button
 $(document).ready(function () {
 
     // create array of questions with 4 possible answers and one correct answer

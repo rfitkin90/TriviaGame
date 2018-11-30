@@ -48,3 +48,8 @@ html,body {
     top: 180px;
     padding: 5px 20px;
 }
+
+#question-panel-container {
+    display: flex;
+    justify-content: center;
+}
