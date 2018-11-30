@@ -39,6 +39,18 @@ $(document).ready(function () {
         // correctAnswer: this.answers[3], // not working
         correctAnswer: "D. Silicon & Synapse",
         img: $('<img src="./assets/images/silicon_and_synapse.png" width="229px" height="200px">'),
+        // },
+        // {
+        //     questionText: `Which Pokémon is logged in the first slot of the Pokédex?`,
+        //     answers: [
+        //         "A. Pikachu",
+        //         "B. Squirtle",
+        //         "C. Charmander",
+        //         "D. Bulbasaur",
+        //     ],
+        //     // correctAnswer: this.answers[0], // not working
+        //     correctAnswer: "D. Bulbasaur",
+        //     img: $('<img src="./assets/images/koji_kondo.png" width="356px" height="200px">'),
     }];
 
     var chosenQuestion = null;
@@ -62,9 +74,6 @@ $(document).ready(function () {
         start: function () {
             this.time = 25;
             timerInterval = setInterval(timer.decrement, 1000);
-            setTimeout(function () {
-                clearInterval(timerInterval);
-            }, 25000);
         },
         stop: function () {
             clearInterval(timerInterval);
@@ -143,9 +152,11 @@ $(document).ready(function () {
     $("body").on("click", "p.answer", function () {
         answerHasBeenSelected = true;
         if ($(this).text() === chosenQuestion.correctAnswer) {
+            timer.stop();
             postGuessPanel(correctGuess, RNG);
             correctAnswers++;
         } else {
+            timer.stop();
             postGuessPanel(incorrectGuess, RNG);
             incorrectAnswers++;
         }
@@ -211,6 +222,7 @@ $(document).ready(function () {
         // if user runs out of time w/o making a guess
         setTimeout(function () {
             if (answerHasBeenSelected === false) {
+                timer.stop();
                 postGuessPanel(timeoutGuess, RNG);
                 unansweredQuestions++;
             }
@@ -295,7 +307,7 @@ $(document).ready(function () {
     // at end of game, display score tallies and a reset game button
     function populateRoundEndScreen() {
         $("#question-panel").empty();
-        $("#question-panel").append(`<p id="score-tally-header" class="score-tally-text">Score Tallies</p>`);
+        $("#question-panel").append(`<p id="score-tally-header" class="score-tally-text">Total Score:</p>`);
         $("#question-panel").css({
             "top": `${115}px`,
         });
