@@ -10,32 +10,32 @@ $(document).ready(function () {
             "C. Pong",
             "D. Space Invaders",
         ],
-        // correctAnswer: this.answers[2], // why isn't this working?
-        correctAnswer: "C. Pong",
+        correctAnswer: function () { return this.answers[2]},
         img: $('<img src="./assets/images/pong.gif" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
         questionText: `Which of these composers wrote the soundtracks for the original 
-            "Super Mario Bros." and "The Legend of Zelda" games for the Nintendo Entertainment System?`,
+                "Super Mario Bros." and "The Legend of Zelda" games for the Nintendo Entertainment System?`,
         answers: [
             "A. Koji Kondo",
             "B. Nobuo Uematsu",
             "C. Yasunori Mitsuda",
             "D. Yoko Shimomura",
         ],
-        correctAnswer: "A. Koji Kondo",
+        correctAnswer: function () { return this.answers[0]},
+
         img: $('<img src="./assets/images/koji_kondo.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
         questionText: `Known for making such titles as "World of Warcraft" and "Diablo", the 
-            company "Activision Blizzard" was orginally called by what name in the early 90s?`,
+                company "Activision Blizzard" was orginally called by what name in the early 90s?`,
         answers: [
             "A. Interplay Productions",
             "B. Condor Games",
             "C. Ogre Studios",
             "D. Silicon & Synapse",
         ],
-        correctAnswer: "D. Silicon & Synapse",
+        correctAnswer: function () { return this.answers[3]},
         img: $('<img src="./assets/images/silicon_and_synapse.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
@@ -46,20 +46,20 @@ $(document).ready(function () {
             "C. Charmander",
             "D. Bulbasaur",
         ],
-        correctAnswer: "D. Bulbasaur",
+        correctAnswer: function () {return this.answers[3]},
         img: $('<img src="./assets/images/bulbasaur.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
         questionText: `Which these games features a specially engineered super-soldier who must 
-        stop a rebellion staged by members of his old unit, each named after an animal (octopus, et al), 
-        and whose sword-wielding friend sacrifices himself to disarm a bipedal battle robot?`,
+            stop a rebellion staged by members of his old unit, each named after an animal (octopus, et al), 
+            and whose sword-wielding friend sacrifices himself to disarm a bipedal battle robot?`,
         answers: [
             "A. Mega Man X",
             "B. Metal Gear Solid",
             "C. Both",
             "D. Neither",
         ],
-        correctAnswer: "C. Both",
+        correctAnswer: function () {return this.answers[2]},
         img: $('<img src="./assets/images/grey_fox_and_zero.png" class="img-fluid" style="max-height:160px; width:auto">'),
     },
     {
@@ -70,19 +70,19 @@ $(document).ready(function () {
             "C. Sub-Zero",
             "D. Bomberman",
         ],
-        correctAnswer: "A. Mega Man",
+        correctAnswer: function () {return this.answers[0]},
         img: $('<img src="./assets/images/megaman.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
         questionText: `In the "Castlevania" series, which of these protagonists is chronologically(in terms 
-        of story timeline, not game release dates) the earliest appearing member of the Belmont Clan?`,
+            of story timeline, not game release dates) the earliest appearing member of the Belmont Clan?`,
         answers: [
             "A. Simon Belmont",
             "B. Richter Belmont",
             "C. Leon Belmont",
             "D. Juste Belmont",
         ],
-        correctAnswer: "C. Leon Belmont",
+        correctAnswer: function () {return this.answers[2]},
         img: $('<img src="./assets/images/leon_belmont.png" class="img-fluid" style="max-height:180px; width:auto">'),
     },
     {
@@ -93,7 +93,7 @@ $(document).ready(function () {
             "C. Blue",
             "D. Yellow",
         ],
-        correctAnswer: "C. Blue",
+        correctAnswer: function () {return this.answers[2]},
         img: $('<img src="./assets/images/blue_yoshi.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
@@ -104,7 +104,7 @@ $(document).ready(function () {
             "C. Juan",
             "D. Miguel",
         ],
-        correctAnswer: "A. Jumpman",
+        correctAnswer: function () {return this.answers[0]},
         img: $('<img src="./assets/images/donkey_kong.gif" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
@@ -115,7 +115,7 @@ $(document).ready(function () {
             "C. Daisy",
             "D. Bowsette",
         ],
-        correctAnswer: "B. Pauline",
+        correctAnswer: function () {return this.answers[1]},
         img: $('<img src="./assets/images/mayor_pauline.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
@@ -126,43 +126,43 @@ $(document).ready(function () {
             "C. Xbox 360",
             "D. PlayStation 2",
         ],
-        correctAnswer: "D. PlayStation 2",
+        correctAnswer: function () {return this.answers[3]},
         img: $('<img src="./assets/images/playstation_2.png" class="img-fluid" style="max-height:150px; width:auto">'),
     },
     {
         questionText: `In order to promote Windows 95, Microsoft released a promotional video of Bill Gates 
-        digitally superimposed into which game?`,
+            digitally superimposed into which game?`,
         answers: [
             "A. Tetris",
             "B. Doom",
             "C. Jazz Jackrabbit",
             "D. SimCity",
         ],
-        correctAnswer: "B. Doom",
+        correctAnswer: function () {return this.answers[1]},
         img: $('<img src="./assets/images/doom.gif" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
         questionText: `How many unique Power Moons can be found in "Super Mario Odyssey"(excluding duplicate 
-            shop purchases)?`,
+                shop purchases)?`,
         answers: [
             "A. 120",
             "B. 500",
             "C. 880",
             "D. 1000",
         ],
-        correctAnswer: "C. 880",
+        correctAnswer: function () {return this.answers[2]},
         img: $('<img src="./assets/images/power_moon.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
         questionText: `How many Korok seeds can you obtain from hidden Koroks in "The Legend of Zelda: 
-        Breath of the Wild"?`,
+            Breath of the Wild"?`,
         answers: [
             "A. 300",
             "B. 450",
             "C. 650",
             "D. 900",
         ],
-        correctAnswer: "D. 900",
+        correctAnswer: function () {return this.answers[3]},
         img: $('<img src="./assets/images/koroks.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
@@ -173,56 +173,56 @@ $(document).ready(function () {
             "C. Tenacity, Cunning, Intellect",
             "D. Brilliance, Braun, Persistence",
         ],
-        correctAnswer: "A. Courage, Wisdom, Power",
+        correctAnswer: function () {return this.answers[0]},
         img: $('<img src="./assets/images/triforce.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
         questionText: `In the "The Idolm@ster" series, which idol became an idol to show her feminine side after 
-        having been raised like a boy by her father who wished he had a son?`,
+            having been raised like a boy by her father who wished he had a son?`,
         answers: [
             "A. Haruka Amami",
             "B. Makoto Kikuchi",
             "C. Miki Hoshii",
             "D. Hibiki Ganaha",
         ],
-        correctAnswer: "B. Makoto Kikuchi",
+        correctAnswer: function () {return this.answers[1]},
         img: $('<img src="./assets/images/makoto.png" class="img-fluid" style="max-height:180px; width:auto">'),
     },
     {
         questionText: `Formerly known as the longest standing video game world record of all time, the fastest time 
-        record for "Dragster", which was recently purged from Guiness World Records for being fake, was believed to 
-        be held by who?`,
+            record for "Dragster", which was recently purged from Guiness World Records for being fake, was believed to 
+            be held by who?`,
         answers: [
             "A. Billy Mitchell",
             "B. Todd Rogers",
             "C. Steve Wiebe",
             "D. Robbie Lakeman",
         ],
-        correctAnswer: "B. Todd Rogers",
+        correctAnswer: function () {return this.answers[1]},
         img: $('<img src="./assets/images/todd_rogers.jpeg" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
         questionText: `Which of these characters is not going to be a playable character in the upcoming "Super Mash Bros. 
-        Ultimate" game?`,
+            Ultimate" game?`,
         answers: [
             "A. Richter Belmont",
             "B. Ridley",
             "C. Waluigi",
             "D. Ryu",
         ],
-        correctAnswer: "C. Waluigi",
+        correctAnswer: function () {return this.answers[2]},
         img: $('<img src="./assets/images/waluigi.png" class="img-fluid" style="max-height:200px; width:auto">'),
     },
     {
         questionText: `Which of the following "Dota 2" heroes was not yet implemented into the game at the time of the 
-        first "The International" tournament in 2011?`,
+            first "The International" tournament in 2011?`,
         answers: [
             "A. Axe",
             "B. Zeus",
             "C. Lycan",
             "D. Nightstalker",
         ],
-        correctAnswer: "C. Lycan",
+        correctAnswer: function () {return this.answers[2]},
         img: $('<img src="./assets/images/lycan.png" class="img-fluid" style="max-height:180px; width:auto">'),
     },
     {
@@ -233,7 +233,7 @@ $(document).ready(function () {
             "C. Wayne Gretzky's 3D Hockey",
             "D. Wave Race 64",
         ],
-        correctAnswer: "D. Wave Race 64",
+        correctAnswer: function () {return this.answers[3]},
         img: $('<img src="./assets/images/wave_race_64.png" class="img-fluid" style="max-height:200px; width:auto">'),
     }];
 
@@ -344,7 +344,9 @@ $(document).ready(function () {
     $("body").on("click", "p.answer", function () {
         answerHasBeenSelected = true;
         clearTimeout(timeOut);
-        if ($(this).text() === chosenQuestion.correctAnswer) {
+        // console.log(this.)
+        console.log($(this).text());
+        if ($(this).text() === chosenQuestion.correctAnswer()) {
             clearAllIntervals();
             postGuessPanel(correctGuess, RNG);
             correctAnswers++;
@@ -436,7 +438,7 @@ $(document).ready(function () {
     // display correct answer, whether the player was correct,
     // incorrect, or ran out of time and start a timer to display next question
     function postGuessPanel(guessOutcome, RNG) {
-        
+
         clearTimeout(timeOut);
         $("#question-panel").css({
             "min-width": `${520}px`,
@@ -454,7 +456,7 @@ $(document).ready(function () {
 
             // show correct answer, image, and next question timer
             $("#correct-answer-sentence").after(`<p id="correct-answer" class="post-guess-text">
-            ${chosenQuestion.correctAnswer}</p>`);
+            ${chosenQuestion.correctAnswer()}</p>`);
             $("#correct-answer").after(chosenQuestion.img);
 
             // timer countdown to next questions
@@ -487,7 +489,7 @@ $(document).ready(function () {
 
             // show correct answer, image, and next question timer
             $("#correct-answer-sentence").after(`<p id="correct-answer" class="post-guess-text">
-            ${chosenQuestion.correctAnswer}</p>`);
+            ${chosenQuestion.correctAnswer()}</p>`);
             $("#correct-answer").after(chosenQuestion.img);
 
             // timer countdown to next questions
@@ -564,32 +566,31 @@ $(document).ready(function () {
                     "C. Pong",
                     "D. Space Invaders",
                 ],
-                // correctAnswer: this.answers[2], // why isn't this working?
-                correctAnswer: "C. Pong",
+                correctAnswer: function () { return this.answers[2]},
                 img: $('<img src="./assets/images/pong.gif" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
                 questionText: `Which of these composers wrote the soundtracks for the original 
-                    "Super Mario Bros." and "The Legend of Zelda" games for the Nintendo Entertainment System?`,
+                        "Super Mario Bros." and "The Legend of Zelda" games for the Nintendo Entertainment System?`,
                 answers: [
                     "A. Koji Kondo",
                     "B. Nobuo Uematsu",
                     "C. Yasunori Mitsuda",
                     "D. Yoko Shimomura",
                 ],
-                correctAnswer: "A. Koji Kondo",
+                correctAnswer: function () { return this.answers[0]},
                 img: $('<img src="./assets/images/koji_kondo.png" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
                 questionText: `Known for making such titles as "World of Warcraft" and "Diablo", the 
-                    company "Activision Blizzard" was orginally called by what name in the early 90s?`,
+                        company "Activision Blizzard" was orginally called by what name in the early 90s?`,
                 answers: [
                     "A. Interplay Productions",
                     "B. Condor Games",
                     "C. Ogre Studios",
                     "D. Silicon & Synapse",
                 ],
-                correctAnswer: "D. Silicon & Synapse",
+                correctAnswer: function () { return this.answers[3]},
                 img: $('<img src="./assets/images/silicon_and_synapse.png" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
@@ -600,20 +601,20 @@ $(document).ready(function () {
                     "C. Charmander",
                     "D. Bulbasaur",
                 ],
-                correctAnswer: "D. Bulbasaur",
+                correctAnswer: function () {return this.answers[3]},
                 img: $('<img src="./assets/images/bulbasaur.png" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
                 questionText: `Which these games features a specially engineered super-soldier who must 
-                stop a rebellion staged by members of his old unit, each named after an animal (octopus, et al), 
-                and whose sword-wielding friend sacrifices himself to disarm a bipedal battle robot?`,
+                    stop a rebellion staged by members of his old unit, each named after an animal (octopus, et al), 
+                    and whose sword-wielding friend sacrifices himself to disarm a bipedal battle robot?`,
                 answers: [
                     "A. Mega Man X",
                     "B. Metal Gear Solid",
                     "C. Both",
                     "D. Neither",
                 ],
-                correctAnswer: "C. Both",
+                correctAnswer: function () {return this.answers[2]},
                 img: $('<img src="./assets/images/grey_fox_and_zero.png" class="img-fluid" style="max-height:160px; width:auto">'),
             },
             {
@@ -624,19 +625,19 @@ $(document).ready(function () {
                     "C. Sub-Zero",
                     "D. Bomberman",
                 ],
-                correctAnswer: "A. Mega Man",
+                correctAnswer: function () {return this.answers[0]},
                 img: $('<img src="./assets/images/megaman.png" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
                 questionText: `In the "Castlevania" series, which of these protagonists is chronologically(in terms 
-                of story timeline, not game release dates) the earliest appearing member of the Belmont Clan?`,
+                    of story timeline, not game release dates) the earliest appearing member of the Belmont Clan?`,
                 answers: [
                     "A. Simon Belmont",
                     "B. Richter Belmont",
                     "C. Leon Belmont",
                     "D. Juste Belmont",
                 ],
-                correctAnswer: "C. Leon Belmont",
+                correctAnswer: function () {return this.answers[2]},
                 img: $('<img src="./assets/images/leon_belmont.png" class="img-fluid" style="max-height:180px; width:auto">'),
             },
             {
@@ -647,7 +648,7 @@ $(document).ready(function () {
                     "C. Blue",
                     "D. Yellow",
                 ],
-                correctAnswer: "C. Blue",
+                correctAnswer: function () {return this.answers[2]},
                 img: $('<img src="./assets/images/blue_yoshi.png" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
@@ -658,7 +659,7 @@ $(document).ready(function () {
                     "C. Juan",
                     "D. Miguel",
                 ],
-                correctAnswer: "A. Jumpman",
+                correctAnswer: function () {return this.answers[0]},
                 img: $('<img src="./assets/images/donkey_kong.gif" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
@@ -669,7 +670,7 @@ $(document).ready(function () {
                     "C. Daisy",
                     "D. Bowsette",
                 ],
-                correctAnswer: "B. Pauline",
+                correctAnswer: function () {return this.answers[1]},
                 img: $('<img src="./assets/images/mayor_pauline.png" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
@@ -680,43 +681,43 @@ $(document).ready(function () {
                     "C. Xbox 360",
                     "D. PlayStation 2",
                 ],
-                correctAnswer: "D. PlayStation 2",
+                correctAnswer: function () {return this.answers[3]},
                 img: $('<img src="./assets/images/playstation_2.png" class="img-fluid" style="max-height:150px; width:auto">'),
             },
             {
                 questionText: `In order to promote Windows 95, Microsoft released a promotional video of Bill Gates 
-                digitally superimposed into which game?`,
+                    digitally superimposed into which game?`,
                 answers: [
                     "A. Tetris",
                     "B. Doom",
                     "C. Jazz Jackrabbit",
                     "D. SimCity",
                 ],
-                correctAnswer: "B. Doom",
+                correctAnswer: function () {return this.answers[1]},
                 img: $('<img src="./assets/images/doom.gif" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
                 questionText: `How many unique Power Moons can be found in "Super Mario Odyssey"(excluding duplicate 
-                    shop purchases)?`,
+                        shop purchases)?`,
                 answers: [
                     "A. 120",
                     "B. 500",
                     "C. 880",
                     "D. 1000",
                 ],
-                correctAnswer: "C. 880",
+                correctAnswer: function () {return this.answers[2]},
                 img: $('<img src="./assets/images/power_moon.png" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
                 questionText: `How many Korok seeds can you obtain from hidden Koroks in "The Legend of Zelda: 
-                Breath of the Wild"?`,
+                    Breath of the Wild"?`,
                 answers: [
                     "A. 300",
                     "B. 450",
                     "C. 650",
                     "D. 900",
                 ],
-                correctAnswer: "D. 900",
+                correctAnswer: function () {return this.answers[3]},
                 img: $('<img src="./assets/images/koroks.png" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
@@ -727,56 +728,56 @@ $(document).ready(function () {
                     "C. Tenacity, Cunning, Intellect",
                     "D. Brilliance, Braun, Persistence",
                 ],
-                correctAnswer: "A. Courage, Wisdom, Power",
+                correctAnswer: function () {return this.answers[0]},
                 img: $('<img src="./assets/images/triforce.png" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
                 questionText: `In the "The Idolm@ster" series, which idol became an idol to show her feminine side after 
-                having been raised like a boy by her father who wished he had a son?`,
+                    having been raised like a boy by her father who wished he had a son?`,
                 answers: [
                     "A. Haruka Amami",
                     "B. Makoto Kikuchi",
                     "C. Miki Hoshii",
                     "D. Hibiki Ganaha",
                 ],
-                correctAnswer: "B. Makoto Kikuchi",
+                correctAnswer: function () {return this.answers[1]},
                 img: $('<img src="./assets/images/makoto.png" class="img-fluid" style="max-height:180px; width:auto">'),
             },
             {
                 questionText: `Formerly known as the longest standing video game world record of all time, the fastest time 
-                record for "Dragster", which was recently purged from Guiness World Records for being fake, was believed to 
-                be held by who?`,
+                    record for "Dragster", which was recently purged from Guiness World Records for being fake, was believed to 
+                    be held by who?`,
                 answers: [
                     "A. Billy Mitchell",
                     "B. Todd Rogers",
                     "C. Steve Wiebe",
                     "D. Robbie Lakeman",
                 ],
-                correctAnswer: "B. Todd Rogers",
+                correctAnswer: function () {return this.answers[1]},
                 img: $('<img src="./assets/images/todd_rogers.jpeg" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
                 questionText: `Which of these characters is not going to be a playable character in the upcoming "Super Mash Bros. 
-                Ultimate" game?`,
+                    Ultimate" game?`,
                 answers: [
                     "A. Richter Belmont",
                     "B. Ridley",
                     "C. Waluigi",
                     "D. Ryu",
                 ],
-                correctAnswer: "C. Waluigi",
+                correctAnswer: function () {return this.answers[2]},
                 img: $('<img src="./assets/images/waluigi.png" class="img-fluid" style="max-height:200px; width:auto">'),
             },
             {
                 questionText: `Which of the following "Dota 2" heroes was not yet implemented into the game at the time of the 
-                first "The International" tournament in 2011?`,
+                    first "The International" tournament in 2011?`,
                 answers: [
                     "A. Axe",
                     "B. Zeus",
                     "C. Lycan",
                     "D. Nightstalker",
                 ],
-                correctAnswer: "C. Lycan",
+                correctAnswer: function () {return this.answers[2]},
                 img: $('<img src="./assets/images/lycan.png" class="img-fluid" style="max-height:180px; width:auto">'),
             },
             {
@@ -787,7 +788,7 @@ $(document).ready(function () {
                     "C. Wayne Gretzky's 3D Hockey",
                     "D. Wave Race 64",
                 ],
-                correctAnswer: "D. Wave Race 64",
+                correctAnswer: function () {return this.answers[3]},
                 img: $('<img src="./assets/images/wave_race_64.png" class="img-fluid" style="max-height:200px; width:auto">'),
             }];
 
