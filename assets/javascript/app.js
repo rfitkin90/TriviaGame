@@ -63,7 +63,7 @@ $(document).ready(function () {
         img: $('<img src="./assets/images/grey_fox_and_zero.png" class="img-fluid" style="max-height:160px; width:auto">'),
     },
     {
-        questionText: `"The Blue Bomber" is a nick name that refers to which of these video game characters?`,
+        questionText: `"The Blue Bomber" is a nickname that refers to which of these video game characters?`,
         answers: [
             "A. Mega Man",
             "B. Sonic the Hedgehog",
@@ -439,7 +439,9 @@ $(document).ready(function () {
     // incorrect, or ran out of time and start a timer to display next question
     function postGuessPanel(guessOutcome, RNG) {
 
+        // clears 25 second timeout when user makes a guess
         clearTimeout(timeOut);
+
         $("#question-panel").css({
             "min-width": `${520}px`,
         });
@@ -542,7 +544,6 @@ $(document).ready(function () {
             $(this).css("background-color", "#191a1e");
         });
 
-        // why does this on click not work if moved outside of populateRoundEndScreen function?
         $("#restart-button").on("click", function () {
             // set variables back to initial values
             chosenQuestion = null;
@@ -618,7 +619,7 @@ $(document).ready(function () {
                 img: $('<img src="./assets/images/grey_fox_and_zero.png" class="img-fluid" style="max-height:160px; width:auto">'),
             },
             {
-                questionText: `"The Blue Bomber" is a nick name that refers to which of these video game characters?`,
+                questionText: `"The Blue Bomber" is a nickname that refers to which of these video game characters?`,
                 answers: [
                     "A. Mega Man",
                     "B. Sonic the Hedgehog",
